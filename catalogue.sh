@@ -5,7 +5,7 @@ app_name=catalogue
 
 check_root
 app_setup
-nodejs_step
+nodejs_setup
 systemd_setup
 
 ### Loading data into MongoDB####
