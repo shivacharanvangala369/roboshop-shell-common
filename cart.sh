@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./common.she
+source ./common.sh
 
 app_name=cart
 
