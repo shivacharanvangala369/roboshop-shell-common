@@ -1,37 +1,34 @@
 #!/bin/bash
-source ./common.sh 
+
+source ./common.sh
+
 app_name=frontend
-app_dir=/usr/share/nginx/html/
+app_dir=/usr/share/nginx/html
 check_root
 
-dnf module disable nginx -y       &>>$LOG_FILE
-dnf module enable nginx:1.24 -y    &>>$LOG_FILE
-dnf install nginx -y                &>>$LOG_FILE
-VALIDATE  $? "enableing nginx 1.24 and insatlling"
+dnf module disable nginx -y &>>$LOGS_FILE
+dnf module enable nginx:1.24 -y &>>$LOGS_FILE
+dnf install nginx -y &>>$LOGS_FILE
+VALIDATE $? "Installing Nginx"
 
-systemctl enable nginx           &>>$LOG_FILE
-systemctl start nginx             &>>$LOG_FILE
-VALIDATE  $? "enable and start nginx"
+systemctl enable nginx  &>>$LOGS_FILE
+systemctl start nginx 
+VALIDATE $? "Enabled and started nginx"
 
-rm -rf /usr/share/nginx/html/*        
-VALIDATE  $? "removing content in html"
+rm -rf /usr/share/nginx/html/* 
+VALIDATE $? "Remove default content"
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip    &>>$LOG_FILE
-VALIDATE  $? "downloading frontend code"
-
-
-cd /usr/share/nginx/html    &>>$LOG_FILE
-unzip /tmp/frontend.zip      &>>$LOG_FILE
-VALIDATE  $? "unzipping frontend"
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOGS_FILE
+cd /usr/share/nginx/html 
+unzip /tmp/frontend.zip &>>$LOGS_FILE
+VALIDATE $? "Downloaded and unzipped frontend"
 
 rm -rf /etc/nginx/nginx.conf
 
-cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf      
-VALIDATE  $? "copying conf file"
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
+VALIDATE $? "Copied our nginx conf file"
 
-#systemctl restart nginx       &>>$LOG_FILE
-#VALIDATE  $? "restart  nginx"
+systemctl restart nginx
+VALIDATE $? "Restarted Nginx"
 
-
-app_restart
 print_total_time
