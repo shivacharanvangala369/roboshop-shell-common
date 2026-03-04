@@ -7,7 +7,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
-SCRIPT_DIR=PWD
+SCRIPT_DIR=$PWD
 MONGODB_HOST=mongodb.devcops.online
 START_TIME=$(date +%s)
 
