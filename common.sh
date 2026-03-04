@@ -62,7 +62,7 @@ app_setup(){
     VALIDATE  $? "creating app dir in / "
 
 
-    curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip   &>>$LOG_FILE
+    curl -o /tmp/$app_name.zip https://roboshop-artifacts.s3.amazonaws.com/$app_name-v3.zip   &>>$LOG_FILE
     VALIDATE  $? "downloading $app_name source code"
 
     cd /app  &>>$LOG_FILE
