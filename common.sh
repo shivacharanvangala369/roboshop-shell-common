@@ -11,7 +11,7 @@ START_TIME=$(date +%s)
 
 mkdir -p $LOG_FOLDER
 
-echo "$(date "%Y-%m-%d %H:%M:%S") | Script started executing at : $(date)" | tee -a $LOG_FILE
+echo "$(date "+%Y-%m-%d %H:%M:%S") | Script started executing at : $(date)" | tee -a $LOG_FILE
 
 
 check_root() {
@@ -24,14 +24,14 @@ check_root() {
 
 VALIDATE(){
     if [ $1 -ne 0 ]; then
-        echo -e "$(date "%Y-%m-%d %H:%M:%S") | $2... $R FAILURE" | tee -a $LOG_FILE
+        echo -e "$(date "+%Y-%m-%d %H:%M:%S") | $2... $R FAILURE" | tee -a $LOG_FILE
     else
-        echo -e "$(date "%Y-%m-%d %H:%M:%S") |$2... $G SUCCESS" | tee -a $LOG_FILE
+        echo -e "$(date "+%Y-%m-%d %H:%M:%S") |$2... $G SUCCESS" | tee -a $LOG_FILE
     fi
 }
 
 print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))
-    echo -e "$(date "%Y-%m-%d %H:%M:%S") | Script execute in $G $TOTAL_TIME seconds $N" | tee a $LOG_FILE
+    echo -e "$(date "+%Y-%m-%d %H:%M:%S") | Script execute in $G $TOTAL_TIME seconds $N" | tee a $LOG_FILE
 }
