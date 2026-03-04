@@ -1,6 +1,6 @@
 #!/bin/bash
 source ./common.sh
-app_name=python 
+app_name=payment 
 check_root
 app_setup
 python_setup
