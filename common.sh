@@ -104,6 +104,15 @@ java_setup(){
 
 }
 
+python_setup(){
+    dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
+    VALIDATE  $? "install python3"
+
+    cd /app   &>>$LOG_FILE
+    pip3 install -r requirements.txt  &>>$LOG_FILE
+    VALIDATE  $? "pip3 install"
+}
+
 print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))
