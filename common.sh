@@ -113,6 +113,17 @@ python_setup(){
     VALIDATE  $? "pip3 install"
 }
 
+golang_setup(){
+    dnf install golang -y  &>>$LOG_FILE
+    VALIDATE  $? "install golang"
+    
+    cd /app   &>>$LOG_FILE
+    go mod init dispatch   &>>$LOG_FILE
+    go get    &>>$LOG_FILE
+    go build  &>>$LOG_FILE
+    VALIDATE  $? "go mod init, get, build"
+}
+
 print_total_time(){
     END_TIME=$(date +%s)
     TOTAL_TIME=$(( $END_TIME - $START_TIME ))
