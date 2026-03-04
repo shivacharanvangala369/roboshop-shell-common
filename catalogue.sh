@@ -30,3 +30,4 @@ fi
 
 
 app_restart
+print_total_time
