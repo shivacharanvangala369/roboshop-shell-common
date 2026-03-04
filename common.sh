@@ -81,9 +81,9 @@ systemd_setup(){
     systemctl daemon-reload    &>>$LOG_FILE
     VALIDATE  $? "daemon-reload"
 
-    systemctl enable catalogue    &>>$LOG_FILE
-    systemctl start catalogue     &>>$LOG_FILE
-    VALIDATE  $? "enable and starting $app_namealouge services"
+    systemctl enable $app_name    &>>$LOG_FILE
+    systemctl start $app_name     &>>$LOG_FILE
+    VALIDATE  $? "enable and starting $app_name services"
 }
 
 app_restart(){
