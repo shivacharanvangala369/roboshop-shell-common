@@ -9,6 +9,7 @@ Y="\e[33m"
 N="\e[34m"
 SCRIPT_DIR=$PWD
 MONGODB_HOST=mongodb.devcops.online
+MYSQL_HOST=mysql.devcops.online
 START_TIME=$(date +%s)
 
 mkdir -p $LOG_FOLDER
@@ -89,6 +90,18 @@ systemd_setup(){
 app_restart(){
     systemctl restart $app_name     &>>$LOG_FILE
     VALIDATE  $? "restarting $app_name services"
+}
+
+java_setup(){
+    dnf install maven -y    &>>$LOG_FILE
+    VALIDATE  $? "install maven"
+
+
+    cd /app      &>>$LOG_FILE
+    mvn clean package     &>>$LOG_FILE
+    mv target/shipping-1.0.jar shipping.jar     &>>$LOG_FILE
+    VALIDATE  $? "build the package"
+
 }
 
 print_total_time(){
